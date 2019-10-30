@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad Nueva</title>
+    <link rel="icon" sizes="32x32" href="favicon.ico">
+    <meta name="theme-color" content="#567777">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="estilos.css">
+    <script type="module" src="lib/registraServiceWorker.js"></script>
+    <script src="lib/polycustom.js"></script>
+    <script type="module" src="mi-footer.js"></script>
+  </head>
+  <body style="background-color:powderblue;">
+    
+   <center> <form id="vista">
+      <header style="background-color:#83cfd0;">
+        
+        <h1 style="color:red;">Agrega LIBRO</h1>
+      </header>
+     <p><input id="titulo" type="text" placeholder="Titulo de libro" minlength="5" maxlength="40"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required></p>
+           <p><input id="autor" type="text" placeholder="Nombre del Autor" minlength="5" maxlength="40"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required></p>
+       
+        <br><BR>
+        <a href="index.html">
+            <button>Cancelar</button></a>
+        <button type="submit">Guardar</button>
+        
+    </form> </center>
+
+        <br>
+        <br>
+
+    <footer is="mi-footer"></footer>
+    <script src="/__/firebase/7.2.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.2.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script type="module">
+      import { error } from "./lib/util.js";
+      const firestore = firebase.firestore();
+      firestore.enablePersistence()
+        .catch(error)
+        .then(() => vista.addEventListener("submit", guarda));
+      async function guarda(evt) {
+        try {
+          evt.preventDefault();
+          const PASA_TITULO = titulo.value.trim();
+          const PASA_AUTOR = autor.value;
+          const modelo = { PASA_TITULO, PASA_AUTOR };
+          await firestore.collection("BIBLIOTECA").add(modelo);
+          document.location = "index.html";
+        } catch (e) {
+          error(e)
+        }
+      }
+    </script>
+  </body>
+</html>

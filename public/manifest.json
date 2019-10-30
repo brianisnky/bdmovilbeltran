@@ -1,0 +1,15 @@
+{
+  "short_name": "BIBLIOTECA",
+  "name": "BIBLIOTECA",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#cee6e6",
+  "theme_color": "#567777",
+  "icons": [
+    {
+      "src": "icono.png",
+      "sizes": "2048x2048",
+      "type": "image/png"
+    }
+  ]
+}
